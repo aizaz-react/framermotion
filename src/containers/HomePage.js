@@ -1,36 +1,50 @@
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import SingularLogo from "../assets/SingularLogo.png";
 import WelcomePageBall from "../assets/WelcomePageBall.png";
 
+function useMediaQuery(query) {
+  const [matches, setMatches] = useState(false);
+
+  useEffect(() => {
+    const media = window.matchMedia(query);
+    if (media.matches !== matches) {
+      setMatches(media.matches);
+    }
+    const listener = () => {
+      setMatches(media.matches);
+    };
+    media.addListener(listener);
+    return () => media.removeListener(listener);
+  }, [matches, query]);
+
+  return matches;
+}
+
 const HomePage = () => {
+  console.log(useMediaQuery("(min-width: 1019px)"));
   const welcomeBallVariants = {
     visible: {
-      x: [0, 0, -100, -50, 100, 50, 0],
-      y: [0, 600, 400, 600, 400, 600, 0],
-
       rotate: 360,
-
       transition: {
-        duration: 5,
+        duration: 1,
         rotate: {
           duration: 1,
-          repeat: Infinity,
+          repeat: 3,
           type: "tween",
           ease: "linear",
         },
-
-        delay: 1,
+        delay: 0.5,
       },
     },
   };
 
   const ballVariants = {
     visible: {
-      rotate: 360,
-
+      rotate: 103,
       transition: {
-        repeat: Infinity,
+        repeat: 0,
         type: "tween",
         ease: "linear",
         duration: 1,
@@ -42,10 +56,8 @@ const HomePage = () => {
     hidden: {
       y: -1000,
     },
-
     visible: {
       y: 0,
-
       transition: {
         type: "spring",
         stiffness: 70,
@@ -54,14 +66,12 @@ const HomePage = () => {
     },
   };
 
-  const fadeFromLeft = {
+  const button = {
     hidden: {
-      x: -1000,
+      opacity: 0,
     },
-
     visible: {
-      x: 0,
-
+      opacity: 1,
       transition: {
         type: "spring",
         stiffness: 70,
@@ -70,17 +80,37 @@ const HomePage = () => {
     },
   };
 
+  const boardVariants = {
+    visible: {
+      x: [-150, 600, 590, 610, 590, 610, 590, 1400],
+      transition: {
+        duration: 6,
+        rotate: {
+          duration: 1,
+          repeat: 3,
+          type: "tween",
+          ease: "linear",
+        },
+        delay: 1,
+      },
+    },
+  };
+
   return (
-    <div className="home_page">
+    <div className="home_page" style={{ minHeight: "100vh" }}>
+      <div className="board-section">
+        <div className="board"></div>
+      </div>
+
       <div className="navbar">
         <Link to="/login" className="text">
           LOG IN
         </Link>
       </div>
-
       <div className="home_page_content">
         <motion.h1 variants={textVariants} initial="hidden" animate="visible">
-          Hi! Nice to see you :) <br /> Here is a series of short, fun games
+          Hi! Nice to see you :) <br /> Here is a series of{" "}
+          <span>short, fun</span> games
         </motion.h1>
         <motion.h2 variants={textVariants} initial="hidden" animate="visible">
           Take a minute to play them freely
@@ -88,22 +118,17 @@ const HomePage = () => {
 
         <Link to="/logical-puzzle/rules">
           <motion.button
-            variants={fadeFromLeft}
+            variants={button}
             className="play_button"
             initial="hidden"
             animate="visible"
           >
-            <motion.img
-              variants={ballVariants}
-              src={WelcomePageBall}
-              alt="WelcomePageBall"
-            />
+            <img src={WelcomePageBall} alt="WelcomePageBall" />
             LET'S GO!
           </motion.button>
         </Link>
-
         <p>
-          © 2022 | Singgular.io | All rights reserved | Let's talk-
+          © 2022 | Singgular.i.5o | All rights reserved | Let's talk-
           Info@singgular.io
         </p>
       </div>
@@ -118,14 +143,13 @@ const HomePage = () => {
             animate="visible"
           />
         </div>
-
         <div className="welcome_page_ball">
           <motion.img
-            src={WelcomePageBall}
-            alt="WelcomePageBall"
             variants={welcomeBallVariants}
-            initial="hidden"
+            src={WelcomePageBall}
+            // initial="hidden"
             animate="visible"
+            alt="WelcomePageBall"
           />
         </div>
       </div>

@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import Ball1 from "../../assets/balls/Ball1.svg";
 import Ball2 from "../../assets/balls/Ball2.svg";
 
@@ -28,11 +29,13 @@ const LogicalPuzzle = () => {
         </div>
 
         <div className="button_row">
-          <button
-          //  className="active"
-          >
-            NEXT GAME
-          </button>
+          <Link to="/rules">
+            <button
+            //  className="active"
+            >
+              NEXT GAME
+            </button>
+          </Link>
         </div>
 
         <div className="rules_row">

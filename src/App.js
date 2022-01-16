@@ -36,8 +36,8 @@ function App() {
                       element={<CreatePasswordPage />}
                     />
                     {/* MazePage */}
-                    {/* <Route path="/" element={<HomePage />} /> */}
-                    <Route path="/" element={<MazePage />} />
+                    <Route path="/" element={<HomePage />} />
+                    <Route path="/rules" element={<MazePage />} />
                     <Route path="/logical-puzzle/rules" element={<Rules />} />
                     <Route path="/logical-puzzle" element={<LogicalPuzzle />} />
                   </Routes>
