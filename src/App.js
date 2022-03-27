@@ -38,7 +38,7 @@ function App() {
                     {/* MazePage */}
                     <Route path="/" element={<HomePage />} />
                     <Route path="/rules" element={<MazePage />} />
-                    <Route path="/logical-puzzle/rules" element={<Rules />} />
+                    <Route path="/logical-puzzle/rules" element={<MazePage />} />
                     <Route path="/logical-puzzle" element={<LogicalPuzzle />} />
                   </Routes>
                 </div>
